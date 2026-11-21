@@ -54,6 +54,24 @@ grind trophies 0.00–0.03%, platinum 0.00%, "Gone Fishing" still 100%.
 The final case's history (to 11:30Z) will carry this; the program reads it
 from the case file, nothing is hardcoded from this snapshot.
 
+## Revision (2026-11-21 ~15:30 WIB, second agent session — fixes kit gate
+`thinking_revised`)
+
+- `FIRST_E_GROWTH` 1.25 → **1.20** in main.ts (only change). The build
+  agent took 1.25 as the midpoint of a loose 1.2–1.3 range; re-checking
+  against the kit's starter (baseline spread is 0.5·√d = 0.125 logit on the
+  90-min practice horizon, not 1.06) shows the baseline's stated practice
+  loss ~1.51 is reproduced at g = 1.20 (1.508), while g = 1.25 gives 1.47
+  and g = 1.30 gives 1.43 — so 1.20, not 1.25, is the calibrated point.
+- Practice re-score (hypothesised answers, dilution g, trophy 2 = 100):
+  at true g = 1.20 loss **0.0229 → 0.0146**, miss 0.0073 → 0.0002 pp;
+  at g = 1.25 loss 0.0146 → 0.0229 (symmetric — the bet is that the
+  baseline-loss evidence identifies g ≈ 1.20); at g = 1.30 loss 0.0223 →
+  0.0460. Coverage unchanged 0.982. Format gates pass, deterministic.
+- Spread s = 0.06 logit left unchanged: sweeping 0.03–0.08 showed no
+  robust gain (tighter helps only at the calibrated centre, hurts the
+  worst case).
+
 ## Local validation
 
 - Practice (hypothesised answers = dilution g∈[1.2,1.3], trophy 2 = 100):

@@ -17,10 +17,13 @@
 // rate unchanged) and the answer is the first refresh. RULES.txt documents
 // that refresh — 3,868 players tracked at 04:30Z, every rate but the 100% one
 // lower — and the house baseline's stated practice loss (~1.51, typical miss
-// ~0.68) is reproduced by pure dilution with earners up ~20-30% into the
-// refresh (g = 1.25 below). So when the history is flat and the horizon is
-// short (the practice shape), forecast that documented refresh with a tight
-// spread instead of pretending the flat page persists.
+// ~0.68) is reproduced by pure dilution with earners up ~20% into the
+// refresh (g = 1.20 below): the baseline's stated loss ~1.51 is matched at
+// g = 1.20 (loss 1.508; g = 1.25 gives 1.47, g = 1.30 gives 1.43), so 1.20
+// is the calibrated point, not the midpoint of the loose 1.2-1.3 range. So
+// when the history is flat and the horizon is short (the practice shape),
+// forecast that documented refresh with a tight spread instead of
+// pretending the flat page persists.
 //
 // Spreads: pinball-optimal honest quantiles. Short-horizon refresh branch
 // s = 0.06 logit (the refresh arithmetic is near-deterministic); trend branch
@@ -46,8 +49,10 @@ const RELEASE_MS = Date.parse('2026-11-19T00:00:00Z');
 /** Launch-night refresh documented in RULES.txt: 638 -> 3,868 players tracked. */
 const FIRST_N0 = 638;
 const FIRST_N1 = 3868;
-/** Earners' growth into that first refresh (calibrated, see header). */
-const FIRST_E_GROWTH = 1.25;
+/** Earners' growth into that first refresh, calibrated (see header): the
+ *  baseline's stated practice loss ~1.51 is reproduced at g = 1.20 (1.508),
+ *  not at the loose range's midpoint 1.25 (1.47). */
+const FIRST_E_GROWTH = 1.2;
 /** Trend fits use the last 24 h of reads (the house curve baseline's window). */
 const WINDOW_MS = 24 * 3600 * 1000;
 
